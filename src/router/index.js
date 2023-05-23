@@ -13,7 +13,7 @@ export default new Router({
     },{
       path:'/pdf',
       name:'pdf',
-      component: ()=>import('../components/pdf')
+      component: ()=>import('@/components/pdf')
     }
   ]
 })

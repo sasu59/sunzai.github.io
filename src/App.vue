@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div class="bigGreen">
+    <!-- <router-view></router-view> -->
+    <!-- <div class="bigGreen">
       <div class="card">
         <div style="height:100px">
           <img class="img1" src="./img/5.jpg"/>
@@ -17,59 +18,122 @@
               <el-button @click="deleteNow(item, $index)" style="height: 30px;">删除</el-button>
             </el-tag>
           </div>
-          
         </div>
         
       </div>
       
+    </div> -->
+  
+
+    <div>
+      <el-menu
+        mode="horizontal"
+        default-active="1"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-user-solid"></i>
+            <span>个人简介</span>
+          </template>
+          <el-menu-item index="1-7" @click="run">选项1</el-menu-item>
+          <el-menu-item index="1-8">选项2</el-menu-item>
+        </el-submenu>
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-video-camera-solid"></i>
+            <span>作品简介</span>
+          </template>
+          <el-menu-item-group>
+            <template slot="title">分组一</template>
+            <el-menu-item index="2-1">选项1</el-menu-item>
+            <el-menu-item index="2-2">选项2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="分组2">
+            <el-menu-item index="2-3">选项3</el-menu-item>
+            <el-menu-item index="2-4">选项4</el-menu-item>
+          </el-menu-item-group>
+          <!-- <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+          </el-submenu> -->
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-scissors"></i>
+            <span>好看的剪辑</span>
+          </template>
+          <el-menu-item-group>
+            <template slot="title">分组一</template>
+            <el-menu-item index="3-1">选项1</el-menu-item>
+            <el-menu-item index="3-2">选项2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="分组2">
+            <el-menu-item index="3-3">选项3</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="3-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="3-4-1">选项1</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+      </el-menu>
     </div>
-    <tbody>
-      <tr>
-        <td>11111111</td>
-        <td>
-          <input type="checkbox" name="sun" value="111" />
-        </td>
-      </tr>
-    </tbody>
     
+
+  <div>
+    <router-view></router-view>
+  </div>
+    
+
+
   </div>
 </template>
 
 <script>
-//import pdf from './components/pdf.vue'
+//import pdf from '@/components/pdf.vue'
+
+import router from './router';
 
 export default {
-  name: 'App',
-  data(){
-    return{
-      textVal: '',
-      list:[
-
-      ]
-    }
-  },
-  //components: {pdf},
-  methods:{
-    run(){
-      $this.$router.push('/pdf')
+    name: "App",
+    data() {
+        return {
+            textVal: "",
+            list: []
+        };
     },
-    adding(){
-      const str = this.textVal
-      this.list.unshift(str)
-      this.textVal = ''
-
+    //components: {pdf},
+    methods: {
+        run() {
+          this.$router.push("/pdf");
+        },
+        handleOpen(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+          console.log(key, keyPath);
+        }
+        // adding(){
+        //   const str = this.textVal
+        //   this.list.unshift(str)
+        //   this.textVal = ''
+        // },
+        // deleteNow(item,index){
+        //   this.run()
+        //   this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        //       confirmButtonText: '确定',
+        //       cancelButtonText: '取消',
+        //       type: 'warning'
+        //     }).then(() => {
+        //       this.list.splice(index,1)
+        //       });
+        //   }
     },
-    deleteNow(item,index){
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.list.splice(index,1)
-          });
-      }
-    }
-  
+    components: { router }
 }
 </script>
 
@@ -109,5 +173,8 @@ export default {
 }
 .booter{
   bottom: 0px;
+}
+::v-deep .el-aside .el-menu{
+  border-right:none;
 }
 </style>
